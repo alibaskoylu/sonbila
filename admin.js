@@ -36,7 +36,7 @@ async function fetchCategories(){
   return data || [];
 }
 async function fetchProducts(){
-  const { data, error } = await supabase.from('products').select('id,name,subtitle,price,description,image_url,category_id, categories!inner(name)').order('id',{ascending:true});
+  const { data, error } = await supabase.from('products').select('id,name,subtitle,price,description,image_url,category_id, categories(name)').order('id',{ascending:true});
   if(error){ console.error(error); alert('Ürün listesi alınamadı: '+error.message); return []; }
   return data || [];
 }
@@ -47,9 +47,8 @@ async function init(){
   await loadCategoriesToSelect();
   await repaintCategories();
     await repaintProducts();
-  await repaintProducts();
-
-  // Tab default
+  // await repaintProducts(); // removed duplicate
+// Tab default
   AdminUI.showTab('products');
 
   // file -> base64 preview handler
@@ -135,8 +134,8 @@ export const AdminActions = {
     $('#c-name').value='';
     await loadCategoriesToSelect();
     await repaintCategories();
-    await repaintProducts();
-  },
+    // await repaintProducts(); // removed duplicate
+},
 
   resetCategoryForm(){
     editingCategoryId = null;
@@ -166,8 +165,8 @@ export const AdminActions = {
 
     editingProductId = null;
     AdminActions.resetProductForm();
-    await repaintProducts();
-  },
+    // await repaintProducts(); // removed duplicate
+},
 
   resetProductForm(){
     $('#p-name').value='';
@@ -190,8 +189,8 @@ tbodyCategories.addEventListener('click', async (e)=>{
     if(error){ alert('Kategori silinemedi: '+error.message); return; }
     await loadCategoriesToSelect();
     await repaintCategories();
-    await repaintProducts();
-  }
+    // await repaintProducts(); // removed duplicate
+}
   if(action==='edit-cat'){
     editingCategoryId = id;
     $('#c-name').value = btn.dataset.name || '';
@@ -205,8 +204,8 @@ tbodyProducts.addEventListener('click', async (e)=>{
     if(!confirm('Bu ürünü silmek istiyor musunuz?')) return;
     const { error } = await supabase.from('products').delete().eq('id', id);
     if(error){ alert('Ürün silinemedi: '+error.message); return; }
-    await repaintProducts();
-  }
+    // await repaintProducts(); // removed duplicate
+}
   if(action==='edit-prod'){
     editingProductId = id;
     // fetch and fill
