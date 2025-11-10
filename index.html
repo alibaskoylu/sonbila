@@ -873,32 +873,7 @@ header img, .logo-bar img {
 
 
 
-<!-- Bila sync override v4: Category theme + hover + ok icon (robust specificity) -->
-<style id="bila-sync-override">
-  :root{
-    --bila-kat-grad: linear-gradient(135deg, #1EB299, #159B84);
-    --bila-kat-grad-hover: linear-gradient(135deg, #19A28D, #128D77);
-  }
-  /* Stronger selectors to beat earlier !important blacks */
-  html body .kategori .kategori-header,
-  body .kategori > .kategori-header,
-  body .kategori-header{
-    background: var(--bila-kat-grad) !important;
-    padding: 10px 16px !important;
-    border-radius: 10px !important;
-  }
-  /* Hover: slightly darker premium */
-  html body .kategori .kategori-header:hover,
-  body .kategori > .kategori-header:hover,
-  body .kategori-header:hover{
-    background: var(--bila-kat-grad-hover) !important;
-  }
-  /* OK icon color (arrow / caret) */
-  .kategori-header .ok{
-    color: #ffffff !important;
-    font-weight: 700;
-  }
-</style>
+
 <script>
 // Fallback: If some runtime style forces black, set inline background once.
 document.addEventListener('DOMContentLoaded', function(){
@@ -913,6 +888,35 @@ document.addEventListener('DOMContentLoaded', function(){
   } catch(e){ /* no-op */ }
 });
 </script>
+
+<!-- Bila sync override v5: Updated Category Color + Modern Font -->
+<style id="bila-sync-override">
+  :root{
+    --bila-kat: #1A635A;
+    --bila-kat-dark: #145149;
+  }
+  html body .kategori .kategori-header,
+  body .kategori > .kategori-header,
+  body .kategori-header{
+    background: linear-gradient(135deg, var(--bila-kat), var(--bila-kat-dark)) !important;
+    padding: 10px 16px !important;
+    border-radius: 10px !important;
+    font-family: 'Poppins', 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px;
+    font-size: 17px !important;
+  }
+  html body .kategori .kategori-header:hover,
+  body .kategori > .kategori-header:hover,
+  body .kategori-header:hover{
+    background: linear-gradient(135deg, var(--bila-kat-dark), var(--bila-kat)) !important;
+  }
+  .kategori-header .ok{
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 20px;
+  }
+</style>
 
 </head>
 <body>
