@@ -889,12 +889,16 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 
-<!-- Bila sync override v5: Updated Category Color + Modern Font -->
+
+
+<!-- Bila sync override v6: FULL PREMIUM (Accent + Inner Shadow + Micro Borders) -->
 <style id="bila-sync-override">
   :root{
     --bila-kat: #1A635A;
     --bila-kat-dark: #145149;
   }
+
+  /* Strong selectors to override previous forced styles */
   html body .kategori .kategori-header,
   body .kategori > .kategori-header,
   body .kategori-header{
@@ -905,12 +909,38 @@ document.addEventListener('DOMContentLoaded', function(){
     font-weight: 600 !important;
     letter-spacing: 0.3px;
     font-size: 17px !important;
+
+    /* (2) Inner premium shadow */
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.28) !important;
+
+    /* (3) Micro borders */
+    border-top: 1px solid rgba(255,255,255,0.12) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.28) !important;
+
+    position: relative;
   }
+
+  /* (1) Accent left line */
+  html body .kategori .kategori-header::before,
+  body .kategori > .kategori-header::before,
+  body .kategori-header::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: rgba(255,255,255,0.20);
+    border-radius: 3px 0 0 3px;
+  }
+
+  /* Hover (slight reversed gradient) */
   html body .kategori .kategori-header:hover,
   body .kategori > .kategori-header:hover,
   body .kategori-header:hover{
     background: linear-gradient(135deg, var(--bila-kat-dark), var(--bila-kat)) !important;
   }
+
   .kategori-header .ok{
     color: #ffffff !important;
     font-weight: 700;
