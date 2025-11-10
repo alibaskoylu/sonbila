@@ -866,6 +866,21 @@ header img, .logo-bar img {
 
 </style>
 
+
+<!-- Bila minimal override: header & kategori-header color/thickness sync -->
+<style id="bila-sync-override">
+  :root{ --bila-hdr-grad: linear-gradient(180deg,#222,#111); }
+  /* Keep header bars consistent */
+  .header, .topbar, .logo-bar { background: var(--bila-hdr-grad) !important; }
+  /* Make category headers use the exact same gradient and slightly thinner padding */
+  .kategori-header{
+    background: var(--bila-hdr-grad) !important;
+    padding: 12px 18px !important;
+    border-radius: 10px !important;
+  }
+  .kategori-header .ok{ color:#fff !important; }
+</style>
+
 </head>
 <body>
 
