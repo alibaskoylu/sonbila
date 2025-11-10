@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Paneli · Bila Tarım</title>
-  
+  <link rel="preconnect" href="index.html">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -55,63 +55,6 @@
     .footer{ margin-top:18px; color:#9ccc9c; font-size:12px; opacity:.9;}
     .pill{ display:inline-block; padding:2px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.14);}
   </style>
-<!-- Bila admin theme override v1: Premium theme for Categories tab only -->
-<style id="bila-admin-theme">
-  :root{
-    --bila-kat:#1A635A;
-    --bila-kat-dark:#145149;
-    --bila-kat-grad: linear-gradient(135deg, var(--bila-kat), var(--bila-kat-dark));
-  }
-  /* Limit to categories tab to avoid affecting products UI */
-  #tab-categories .card{
-    position: relative;
-    border-radius:14px;
-    box-shadow: 0 6px 18px rgba(0,0,0,.28);
-    border-top: 1px solid rgba(255,255,255,0.10);
-    border-bottom: 1px solid rgba(0,0,0,0.30);
-  }
-  /* Accent line on left of the card */
-  #tab-categories .card::before{
-    content:"";
-    position:absolute; left:0; top:0; height:100%; width:3px;
-    background: rgba(255,255,255,0.22);
-    border-radius:3px 0 0 3px;
-  }
-  /* Headings */
-  #tab-categories .card h3{
-    background: var(--bila-kat-grad);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight:700;
-    letter-spacing:.3px;
-  }
-  /* Table header */
-  #tab-categories table thead th{
-    background: var(--bila-kat-grad);
-    color:#fff;
-    border:0;
-  }
-  /* Buttons inside categories tab */
-  #tab-categories .btn{
-    background: var(--bila-kat-grad);
-    border-color: rgba(255,255,255,.18);
-  }
-  #tab-categories .btn.muted{
-    background: linear-gradient(135deg, #2f3c3a, #1e2927);
-  }
-  #tab-categories .btn:hover{
-    filter: brightness(1.06);
-    transform: translateY(-1px);
-  }
-  /* Inputs focus ring */
-  #tab-categories input:focus, #tab-categories textarea:focus{
-    outline: 2px solid rgba(26,99,90,.45);
-    border-color: rgba(26,99,90,.55);
-    box-shadow: 0 0 0 3px rgba(26,99,90,.18);
-  }
-</style>
-
 </head>
 <body>
   <header>

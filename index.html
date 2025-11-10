@@ -866,70 +866,58 @@ header img, .logo-bar img {
 
 </style>
 
-
-
-
-
-
-
-
-
-<script>
-// Fallback: If some runtime style forces black, set inline background once.
-document.addEventListener('DOMContentLoaded', function(){
-  try {
-    var targetBg = 'linear-gradient(135deg, rgb(30, 178, 153), rgb(21, 155, 132))';
-    document.querySelectorAll('.kategori-header').forEach(function(el){
-      var cs = getComputedStyle(el).backgroundImage || '';
-      if (!cs || cs.includes('linear-gradient(180deg, rgb(34, 34, 34), rgb(17, 17, 17))')) {
-        el.style.backgroundImage = 'linear-gradient(135deg, #1EB299, #159B84)';
-      }
-    });
-  } catch(e){ /* no-op */ }
-});
-</script>
-
-
-
-
-
-<!-- Bila Glass Theme override v7: Soft Dark + Glass (categories + product cards), mobile-optimized -->
+<!-- Bila Glass Theme override v8: Midnight Mint + Soft Mint Glow (level 2), mobile-optimized -->
 <style id="bila-glass-theme">
   :root{
-    /* Soft dark background (Koyu Yeşil-Füme) */
-    --bg-dark-1:#0E1513;
-    --bg-dark-2:#0B1311;
-    --bg-dark-3:#0F1E1A;
+    /* Lighter Midnight Mint background */
+    --bg-mm-1:#0f1f1b;
+    --bg-mm-2:#132521;
+    --bg-mm-3:#0e1a17;
+    --bg-mm-glow: rgba(26, 99, 90, 0.18); /* subtle mint haze */
 
-    /* Mint-green brand */
+    /* Brand mint */
     --mint:#1A635A;
     --mint-2:#145149;
 
-    /* Glass settings */
-    --glass-bg: rgba(26,99,90,0.08);         /* light mint tint */
-    --glass-bg-card: rgba(12, 20, 18, 0.35); /* deeper for product cards */
+    /* Glass settings (keep) */
+    --glass-bg: rgba(26,99,90,0.08);
+    --glass-bg-card: rgba(12, 20, 18, 0.32);
     --glass-brd: rgba(26,99,90,0.28);
     --glass-edge: rgba(26,99,90,0.55);
-    --glass-shadow: 0 12px 28px rgba(0,0,0,0.28);
-    --glass-shadow-mobile: 0 8px 18px rgba(0,0,0,0.22);
+    --glass-shadow: 0 12px 28px rgba(0,0,0,0.24);
+    --glass-shadow-mobile: 0 8px 18px rgba(0,0,0,0.18);
     --blur-desktop: 18px;
     --blur-tablet: 14px;
     --blur-mobile: 9px;
+
+    /* Mint soft glow (level 2) */
+    --mint-glow: 0 0 10px rgba(26,99,90,0.28), 0 0 24px rgba(26,99,90,0.16);
+    --text-color:#eaf7f3;
+    --text-muted:#cfe8e2;
   }
 
-  /* Soft dark premium background */
+  /* Midnight Mint background (lighter than v7) */
   body{
     background:
-      radial-gradient(1200px 800px at 10% -10%, rgba(26,99,90,0.10), transparent 60%),
-      linear-gradient(160deg, var(--bg-dark-1), var(--bg-dark-3) 40%, var(--bg-dark-2));
+      radial-gradient(1000px 700px at 10% -10%, var(--bg-mm-glow), transparent 55%),
+      linear-gradient(160deg, var(--bg-mm-1), var(--bg-mm-2) 45%, var(--bg-mm-3));
     background-attachment: fixed;
-  }
-  /* Keep header bars consistent dark premium */
-  .header, .topbar, .logo-bar {
-    background: linear-gradient(180deg, #111, #0c0c0c) !important;
+    color: var(--text-color) !important;
   }
 
-  /* CATEGORY HEADER: Glass + mint edge + inner shadow + micro borders */
+  /* Global readable text + soft mint glow */
+  body, main, .kategori, .urun, .kategori-header, .header, .topbar, .logo-bar{
+    color: var(--text-color) !important;
+    text-shadow: var(--mint-glow);
+  }
+  .meta, .urun p:nth-of-type(2), small, .note{ color: var(--text-muted) !important; }
+
+  /* Keep header bars consistent (slightly lighter than v7) */
+  .header, .topbar, .logo-bar {
+    background: linear-gradient(180deg, #151a19, #0f1413) !important;
+  }
+
+  /* CATEGORY HEADER: Glass + mint edge + readable text */
   html body .kategori .kategori-header,
   body .kategori > .kategori-header,
   body .kategori-header{
@@ -940,10 +928,9 @@ document.addEventListener('DOMContentLoaded', function(){
     border: 1px solid var(--glass-brd) !important;
     box-shadow: var(--glass-shadow) !important;
     border-top: 1px solid rgba(255,255,255,0.10) !important;
-    border-bottom: 1px solid rgba(0,0,0,0.30) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.26) !important;
     padding: 10px 16px !important;
     border-radius: 12px !important;
-    color: #eef7f4 !important;
     font-family: 'Poppins','Inter',sans-serif !important;
     font-weight: 600 !important;
     letter-spacing: .3px;
@@ -956,9 +943,9 @@ document.addEventListener('DOMContentLoaded', function(){
     background: var(--glass-edge);
     border-radius: 3px 0 0 3px;
   }
-  .kategori-header .ok{ color:#fff !important; font-weight:700; font-size:20px; }
+  .kategori-header .ok{ color:#fff !important; font-weight:700; font-size:20px; text-shadow:none; }
 
-  /* PRODUCT CARDS: Glass + mint border + elevation */
+  /* PRODUCT CARDS: Glass + readable text */
   .urun{
     background: var(--glass-bg-card) !important;
     -webkit-backdrop-filter: blur(var(--blur-desktop));
@@ -967,10 +954,8 @@ document.addEventListener('DOMContentLoaded', function(){
     box-shadow: var(--glass-shadow) !important;
     border-radius: 14px !important;
   }
-  .urun:hover{
-    transform: translateY(-3px);
-    filter: brightness(1.02);
-  }
+  .urun p{ color: var(--text-color) !important; text-shadow: var(--mint-glow); }
+  .urun p:nth-of-type(2){ color: var(--text-muted) !important; }
 
   /* Mobile & tablet optimizations */
   @media (max-width: 1024px){
