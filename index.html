@@ -869,16 +869,50 @@ header img, .logo-bar img {
 
 
 
-<!-- Bila sync override v2: thinner category header, keep original OK colors -->
+
+
+
+
+<!-- Bila sync override v4: Category theme + hover + ok icon (robust specificity) -->
 <style id="bila-sync-override">
-  :root{ --bila-hdr-grad: linear-gradient(180deg,#222,#111); }
-  .header, .topbar, .logo-bar { background: var(--bila-hdr-grad) !important; }
-  .kategori-header{
-    background: var(--bila-hdr-grad) !important;
+  :root{
+    --bila-kat-grad: linear-gradient(135deg, #1EB299, #159B84);
+    --bila-kat-grad-hover: linear-gradient(135deg, #19A28D, #128D77);
+  }
+  /* Stronger selectors to beat earlier !important blacks */
+  html body .kategori .kategori-header,
+  body .kategori > .kategori-header,
+  body .kategori-header{
+    background: var(--bila-kat-grad) !important;
     padding: 10px 16px !important;
     border-radius: 10px !important;
   }
+  /* Hover: slightly darker premium */
+  html body .kategori .kategori-header:hover,
+  body .kategori > .kategori-header:hover,
+  body .kategori-header:hover{
+    background: var(--bila-kat-grad-hover) !important;
+  }
+  /* OK icon color (arrow / caret) */
+  .kategori-header .ok{
+    color: #ffffff !important;
+    font-weight: 700;
+  }
 </style>
+<script>
+// Fallback: If some runtime style forces black, set inline background once.
+document.addEventListener('DOMContentLoaded', function(){
+  try {
+    var targetBg = 'linear-gradient(135deg, rgb(30, 178, 153), rgb(21, 155, 132))';
+    document.querySelectorAll('.kategori-header').forEach(function(el){
+      var cs = getComputedStyle(el).backgroundImage || '';
+      if (!cs || cs.includes('linear-gradient(180deg, rgb(34, 34, 34), rgb(17, 17, 17))')) {
+        el.style.backgroundImage = 'linear-gradient(135deg, #1EB299, #159B84)';
+      }
+    });
+  } catch(e){ /* no-op */ }
+});
+</script>
 
 </head>
 <body>
