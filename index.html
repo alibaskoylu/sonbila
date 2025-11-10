@@ -891,60 +891,101 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
-<!-- Bila sync override v6: FULL PREMIUM (Accent + Inner Shadow + Micro Borders) -->
-<style id="bila-sync-override">
+
+
+<!-- Bila Glass Theme override v7: Soft Dark + Glass (categories + product cards), mobile-optimized -->
+<style id="bila-glass-theme">
   :root{
-    --bila-kat: #1A635A;
-    --bila-kat-dark: #145149;
+    /* Soft dark background (Koyu Yeşil-Füme) */
+    --bg-dark-1:#0E1513;
+    --bg-dark-2:#0B1311;
+    --bg-dark-3:#0F1E1A;
+
+    /* Mint-green brand */
+    --mint:#1A635A;
+    --mint-2:#145149;
+
+    /* Glass settings */
+    --glass-bg: rgba(26,99,90,0.08);         /* light mint tint */
+    --glass-bg-card: rgba(12, 20, 18, 0.35); /* deeper for product cards */
+    --glass-brd: rgba(26,99,90,0.28);
+    --glass-edge: rgba(26,99,90,0.55);
+    --glass-shadow: 0 12px 28px rgba(0,0,0,0.28);
+    --glass-shadow-mobile: 0 8px 18px rgba(0,0,0,0.22);
+    --blur-desktop: 18px;
+    --blur-tablet: 14px;
+    --blur-mobile: 9px;
   }
 
-  /* Strong selectors to override previous forced styles */
+  /* Soft dark premium background */
+  body{
+    background:
+      radial-gradient(1200px 800px at 10% -10%, rgba(26,99,90,0.10), transparent 60%),
+      linear-gradient(160deg, var(--bg-dark-1), var(--bg-dark-3) 40%, var(--bg-dark-2));
+    background-attachment: fixed;
+  }
+  /* Keep header bars consistent dark premium */
+  .header, .topbar, .logo-bar {
+    background: linear-gradient(180deg, #111, #0c0c0c) !important;
+  }
+
+  /* CATEGORY HEADER: Glass + mint edge + inner shadow + micro borders */
   html body .kategori .kategori-header,
   body .kategori > .kategori-header,
   body .kategori-header{
-    background: linear-gradient(135deg, var(--bila-kat), var(--bila-kat-dark)) !important;
-    padding: 10px 16px !important;
-    border-radius: 10px !important;
-    font-family: 'Poppins', 'Inter', sans-serif !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.3px;
-    font-size: 17px !important;
-
-    /* (2) Inner premium shadow */
-    box-shadow: inset 0 0 8px rgba(0,0,0,0.28) !important;
-
-    /* (3) Micro borders */
-    border-top: 1px solid rgba(255,255,255,0.12) !important;
-    border-bottom: 1px solid rgba(0,0,0,0.28) !important;
-
     position: relative;
+    background: var(--glass-bg) !important;
+    -webkit-backdrop-filter: blur(var(--blur-desktop));
+    backdrop-filter: blur(var(--blur-desktop));
+    border: 1px solid var(--glass-brd) !important;
+    box-shadow: var(--glass-shadow) !important;
+    border-top: 1px solid rgba(255,255,255,0.10) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.30) !important;
+    padding: 10px 16px !important;
+    border-radius: 12px !important;
+    color: #eef7f4 !important;
+    font-family: 'Poppins','Inter',sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: .3px;
   }
-
-  /* (1) Accent left line */
+  /* Left accent line */
   html body .kategori .kategori-header::before,
   body .kategori > .kategori-header::before,
   body .kategori-header::before{
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: rgba(255,255,255,0.20);
+    content:""; position:absolute; left:0; top:0; height:100%; width:3px;
+    background: var(--glass-edge);
     border-radius: 3px 0 0 3px;
   }
+  .kategori-header .ok{ color:#fff !important; font-weight:700; font-size:20px; }
 
-  /* Hover (slight reversed gradient) */
-  html body .kategori .kategori-header:hover,
-  body .kategori > .kategori-header:hover,
-  body .kategori-header:hover{
-    background: linear-gradient(135deg, var(--bila-kat-dark), var(--bila-kat)) !important;
+  /* PRODUCT CARDS: Glass + mint border + elevation */
+  .urun{
+    background: var(--glass-bg-card) !important;
+    -webkit-backdrop-filter: blur(var(--blur-desktop));
+    backdrop-filter: blur(var(--blur-desktop));
+    border: 1px solid var(--glass-brd) !important;
+    box-shadow: var(--glass-shadow) !important;
+    border-radius: 14px !important;
+  }
+  .urun:hover{
+    transform: translateY(-3px);
+    filter: brightness(1.02);
   }
 
-  .kategori-header .ok{
-    color: #ffffff !important;
-    font-weight: 700;
-    font-size: 20px;
+  /* Mobile & tablet optimizations */
+  @media (max-width: 1024px){
+    .kategori-header, .urun{
+      -webkit-backdrop-filter: blur(var(--blur-tablet));
+      backdrop-filter: blur(var(--blur-tablet));
+      box-shadow: var(--glass-shadow-mobile) !important;
+    }
+  }
+  @media (max-width: 768px){
+    .kategori-header, .urun{
+      -webkit-backdrop-filter: blur(var(--blur-mobile));
+      backdrop-filter: blur(var(--blur-mobile));
+      box-shadow: var(--glass-shadow-mobile) !important;
+    }
   }
 </style>
 
